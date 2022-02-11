@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import GlobalStyle from "./GlobalStyle";
 
+import YourChoice from "./YourChoice";
+
 import questionSvg from './questionSvg.svg'
 
 
@@ -12,6 +14,7 @@ import questionSvg from './questionSvg.svg'
       const [k10Choice, setK10Choice] = useState(false)
       const [k20Choice, setK20Choice] = useState(false)
       const [k100Choice, setK100Choice] = useState(false)
+      const [result, setResult] = useState(3)
 
       const onClickChoiceK6 = () => {
           setK6Choice(true)
@@ -61,10 +64,11 @@ import questionSvg from './questionSvg.svg'
                       <OneOptionCard onClick={onClickChoiceK20}>k20</OneOptionCard>
                       <OneOptionCard onClick={onClickChoiceK100}>k100</OneOptionCard>
                   </OptionsToChoice>
+                  <WrappYourChoice>
+                      <YourChoice k6Choice={k6Choice} k10Choice={k10Choice} k20Choice={k20Choice} k100Choice={k100Choice} setResult={setResult}/>
+                      {result !== null && <Result>Wyrzuciłeś: {result}</Result>}
+                  </WrappYourChoice>
 
-                  <YourChoice>
-
-                  </YourChoice>
               </WrappDicesPart>
           </AppWrapp>
         </>
@@ -78,7 +82,7 @@ import questionSvg from './questionSvg.svg'
   //border: 2px solid red;
      min-width: 375px;
     max-width: 1000px;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -93,7 +97,6 @@ const Header = styled.div`
 `
 
 const Title = styled.h1`
-  
   width: 50%;
  text-align: center; 
   align-self: flex-end;
@@ -111,7 +114,7 @@ const QuestionSvgStyled = styled.img`
 `
 
 const WrappDicesPart = styled.div`
-  border: 2px solid blue;
+  //border: 2px solid blue;
 margin-top: 40px;
    padding: 0 40px 40px 40px;
   display: flex;
@@ -131,7 +134,7 @@ const OptionsToChoice = styled.div`
  `
 
 const OneOptionCard = styled.button`
-  background-color: transparent;
+   background-color: transparent;
   border: 2px solid #899903;
   width: 200px;
   height: 50px;
@@ -149,12 +152,25 @@ const OneOptionCard = styled.button`
   }
 `
 
-const YourChoice = styled.div`
-  border: 2px solid purple;
+const WrappYourChoice = styled.div`
+  //border: 2px solid purple;
   width: 100%;
   padding: 20px 0;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  //align-items: center;
   flex-wrap: wrap;
+  height: 300px;
+`
+
+const Result = styled.h2`
+  width: 40%;
+  text-align: center;
+  align-self: flex-end;
+  justify-self: flex-end ;
+  padding: 40px 40px 0px 40px;
+  border-bottom: 2px solid #899903;
+  //border: 2px solid blue;
 `
 
