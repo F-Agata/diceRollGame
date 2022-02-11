@@ -1,25 +1,160 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import styled from 'styled-components'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import GlobalStyle from "./GlobalStyle";
 
-export default App;
+import questionSvg from './questionSvg.svg'
+
+
+  function App() {
+
+      const [k6Choice, setK6Choice] = useState(false)
+      const [k10Choice, setK10Choice] = useState(false)
+      const [k20Choice, setK20Choice] = useState(false)
+      const [k100Choice, setK100Choice] = useState(false)
+
+      const onClickChoiceK6 = () => {
+          setK6Choice(true)
+          setK10Choice(false)
+          setK20Choice(false)
+          setK100Choice(false)
+                }
+
+      const onClickChoiceK10 = () => {
+          setK6Choice(false)
+          setK10Choice(true)
+          setK20Choice(false)
+          setK100Choice(false)
+      }
+
+      const onClickChoiceK20 = () => {
+          setK6Choice(false)
+          setK10Choice(false)
+          setK20Choice(true)
+          setK100Choice(false)
+      }
+
+      const onClickChoiceK100 = () => {
+          setK6Choice(false)
+          setK10Choice(false)
+          setK20Choice(false)
+          setK100Choice(true)
+      }
+
+    return (
+        <>
+          <GlobalStyle />
+          <AppWrapp>
+              <Header>
+                  <Title>Jaką kostkę wybierasz?</Title>
+                  <WrappQuestionSvg>
+                      <QuestionSvgStyled  src={questionSvg} alt="questionSvg"/>
+                  </WrappQuestionSvg>
+
+
+              </Header>
+
+              <WrappDicesPart>
+                  <OptionsToChoice>
+                      <OneOptionCard onClick={onClickChoiceK6} >k6</OneOptionCard>
+                      <OneOptionCard onClick={onClickChoiceK10}>k10</OneOptionCard>
+                      <OneOptionCard onClick={onClickChoiceK20}>k20</OneOptionCard>
+                      <OneOptionCard onClick={onClickChoiceK100}>k100</OneOptionCard>
+                  </OptionsToChoice>
+
+                  <YourChoice>
+
+                  </YourChoice>
+              </WrappDicesPart>
+          </AppWrapp>
+        </>
+    );
+  }
+
+  export default App;
+
+  const AppWrapp = styled.div`
+    margin: 0 auto  ;
+  //border: 2px solid red;
+     min-width: 375px;
+    max-width: 1000px;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+    `
+
+const Header = styled.div`
+  padding: 20px 40px 0px 40px;
+    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
+const Title = styled.h1`
+  
+  width: 50%;
+ text-align: center; 
+  align-self: flex-end;
+  padding: 40px 40px 0px 40px;
+   border-bottom: 2px solid #899903;
+   //border: 2px solid blue;
+  `
+const WrappQuestionSvg = styled.div`
+  //border: 2px solid blue;
+    width: 30%;
+`
+const QuestionSvgStyled = styled.img`
+    width: 100%;
+  height: 100%;
+`
+
+const WrappDicesPart = styled.div`
+  border: 2px solid blue;
+margin-top: 40px;
+   padding: 0 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+`
+
+const OptionsToChoice = styled.div`
+  //border: 2px solid pink;
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+ `
+
+const OneOptionCard = styled.button`
+  background-color: transparent;
+  border: 2px solid #899903;
+  width: 200px;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;  
+  :hover {
+    transform: scale(1.2,1.2); 
+  }
+  :active {
+    transform: scale(1.2,1.2);
+    background-color: #899903; 
+  }
+`
+
+const YourChoice = styled.div`
+  border: 2px solid purple;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
