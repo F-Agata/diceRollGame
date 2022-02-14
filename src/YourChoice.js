@@ -26,7 +26,10 @@ const onClickGiveResult = () => {
     }  else if (k100Choice === true) {howManyMeshes = 100}
 
     // console.log("howManyMeshes", howManyMeshes)
-    console.log(Math.floor(Math.random()*100+1))
+    // console.log(Math.floor(Math.random()*6+1))
+    const rollDice = Math.floor(Math.random()*howManyMeshes+1);
+    setResult(rollDice)
+
 
 }
 

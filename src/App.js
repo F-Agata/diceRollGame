@@ -14,7 +14,7 @@ import questionSvg from './questionSvg.svg'
       const [k10Choice, setK10Choice] = useState(false)
       const [k20Choice, setK20Choice] = useState(false)
       const [k100Choice, setK100Choice] = useState(false)
-      const [result, setResult] = useState(123)
+      const [result, setResult] = useState(null)
 
       const onClickChoiceK6 = () => {
           setK6Choice(true)
