@@ -18,7 +18,17 @@ const YourChoice = ({ k6Choice, k10Choice, k20Choice, k100Choice, setResult}) =>
         } else setShowBtn(false)
     }, [k6Choice, k10Choice, k20Choice, k100Choice])
 
+const onClickGiveResult = () => {
+        let howManyMeshes = null
+    if (k6Choice === true) {howManyMeshes = 6
+    }  else if (k10Choice === true) {howManyMeshes = 10
+    }  else if (k20Choice === true) {howManyMeshes = 20
+    }  else if (k100Choice === true) {howManyMeshes = 100}
 
+    // console.log("howManyMeshes", howManyMeshes)
+    console.log(Math.floor(Math.random()*100+1))
+
+}
 
     return (
         <WrappDiceAndBtn>
@@ -28,7 +38,7 @@ const YourChoice = ({ k6Choice, k10Choice, k20Choice, k100Choice, setResult}) =>
                 {k20Choice && <Dice src={d20} alt="d20picture"/>}
                 {k100Choice && <Dice src={d100} alt="d100picture"/>}
             </WrappDice>
-            {showBtn && <Btn>Rzuć kością</Btn>}
+            {showBtn && <Btn onClick={onClickGiveResult}>Rzuć kością</Btn>}
         </WrappDiceAndBtn>
     )
 }
@@ -37,29 +47,42 @@ export default YourChoice
 
 const WrappDiceAndBtn = styled.div`
   //border: 2px solid crimson;  
-  width: 60%;
-display: flex;
-  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 530px) {
+       flex-direction: row;
+    justify-content: flex-start;
+    }
 `
 
 const WrappDice = styled.div`
-  //border: 2px solid chartreuse;
-    width: 200px;
-  position: relative;
-  `
+  //background-color:  chartreuse;
+    width: 300px;
+  height: 300px;
+  @media (min-width: 530px) {
+    position: relative;
+    height: 200px;
+  }
+     `
 
 const Dice = styled.img`
-width: 300px;
+  //border: 2px solid crimson;
+  width: 300px;
 height: 300px;
-  position: absolute;
+  @media (min-width: 530px) {
+    position: absolute;
+    left: 0;
+      }
+  
 `
 const Btn = styled.button`
-  margin: 40px ;
+  margin: 10px ;
   background-color: transparent;
   border: 2px solid #899903;
-  width: 200px;
-  height: 50px;
-  padding: 10px;
+  line-height: 20px;
+  padding: 10px 20px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -70,6 +93,9 @@ const Btn = styled.button`
   :active {
     transform: scale(1.2,1.2);
     background-color: #899903;
+  }
+  @media (min-width: 530px) {
+    align-self: flex-start;
   }
 `
 

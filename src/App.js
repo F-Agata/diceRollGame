@@ -14,7 +14,7 @@ import questionSvg from './questionSvg.svg'
       const [k10Choice, setK10Choice] = useState(false)
       const [k20Choice, setK20Choice] = useState(false)
       const [k100Choice, setK100Choice] = useState(false)
-      const [result, setResult] = useState(3)
+      const [result, setResult] = useState(123)
 
       const onClickChoiceK6 = () => {
           setK6Choice(true)
@@ -81,8 +81,8 @@ import questionSvg from './questionSvg.svg'
     margin: 0 auto  ;
   //border: 2px solid red;
      min-width: 375px;
-    max-width: 1000px;
-  min-height: 100vh;
+    max-width: 700px;
+  min-height: 200vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -97,16 +97,22 @@ const Header = styled.div`
 `
 
 const Title = styled.h1`
-  width: 50%;
+  width: 100%;
  text-align: center; 
   align-self: flex-end;
   padding: 40px 40px 0px 40px;
    border-bottom: 2px solid #899903;
    //border: 2px solid blue;
+  @media (min-width: 520px) {
+    width: 50%;;
+  }
   `
 const WrappQuestionSvg = styled.div`
   //border: 2px solid blue;
-    width: 30%;
+    width: 100%;
+  @media (min-width: 520px) {
+    width: 30%;;
+  }
 `
 const QuestionSvgStyled = styled.img`
     width: 100%;
@@ -129,16 +135,22 @@ const OptionsToChoice = styled.div`
   text-align: center;
   font-size: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
- `
-
+  @media (min-width: 530px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  `
 const OneOptionCard = styled.button`
    background-color: transparent;
   border: 2px solid #899903;
   width: 200px;
   height: 50px;
   padding: 10px;
+  margin: 10px ;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -150,27 +162,31 @@ const OneOptionCard = styled.button`
     transform: scale(1.2,1.2);
     background-color: #899903; 
   }
+  
 `
 
 const WrappYourChoice = styled.div`
   //border: 2px solid purple;
   width: 100%;
-  padding: 20px 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  //align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+   align-items: center;
   height: 300px;
+ 
 `
 
 const Result = styled.h2`
-  width: 40%;
-  text-align: center;
-  align-self: flex-end;
-  justify-self: flex-end ;
-  padding: 40px 40px 0px 40px;
+  width: 60%;
+   text-align: center;
+  align-self: center;
+  justify-self: center ;
+  padding: 20px 0 10px 0  ;
   border-bottom: 2px solid #899903;
   //border: 2px solid blue;
+  @media (min-width: 530px) {
+    text-align: end;
+    width: 40%;
+    align-self: flex-end;  
+         }
 `
 
