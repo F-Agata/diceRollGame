@@ -29,7 +29,9 @@ const onClickGiveResult = () => {
     // console.log(Math.floor(Math.random()*6+1))
     const rollDice = Math.floor(Math.random()*howManyMeshes+1);
     setResult(rollDice)
+}
 
+const moreDices = () => {
 
 }
 
@@ -42,7 +44,7 @@ const onClickGiveResult = () => {
                 {k100Choice && <Dice src={d100} alt="d100picture"/>}
             </WrappDice>
             {showBtn && <Btn onClick={onClickGiveResult}>Rzuć kością</Btn>}
-        </WrappDiceAndBtn>
+       </WrappDiceAndBtn>
     )
 }
 

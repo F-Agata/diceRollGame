@@ -53,10 +53,7 @@ import questionSvg from './questionSvg.svg'
                   <WrappQuestionSvg>
                       <QuestionSvgStyled  src={questionSvg} alt="questionSvg"/>
                   </WrappQuestionSvg>
-
-
               </Header>
-
               <WrappDicesPart>
                   <OptionsToChoice>
                       <OneOptionCard onClick={onClickChoiceK6} >k6</OneOptionCard>
@@ -89,7 +86,7 @@ import questionSvg from './questionSvg.svg'
     `
 
 const Header = styled.div`
-  padding: 20px 40px 0px 40px;
+  padding: 0px 40px 0px 40px;
     width: 100%;
   display: flex;
   justify-content: space-between;
@@ -97,23 +94,25 @@ const Header = styled.div`
 `
 
 const Title = styled.h1`
-  width: 100%;
+  width: 70%;
  text-align: center; 
   align-self: flex-end;
   padding: 40px 40px 0px 40px;
    border-bottom: 2px solid #899903;
    //border: 2px solid blue;
   @media (min-width: 520px) {
-    width: 50%;;
+    width: 72%;
+    padding: 40px 10px 0px 10px;
   }
   `
 const WrappQuestionSvg = styled.div`
   //border: 2px solid blue;
-    width: 100%;
+    width: 30%;
   @media (min-width: 520px) {
-    width: 30%;;
+    width: 26%;;
   }
-`
+  `
+
 const QuestionSvgStyled = styled.img`
     width: 100%;
   height: 100%;
