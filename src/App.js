@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 
 import GlobalStyle from "./GlobalStyle";
@@ -44,6 +44,10 @@ import questionSvg from './questionSvg.svg'
           setK100Choice(true)
       }
 
+      useEffect(()=> {
+          console.log("result", result)
+      }, [])
+
     return (
         <>
           <GlobalStyle />
@@ -63,6 +67,7 @@ import questionSvg from './questionSvg.svg'
                   </OptionsToChoice>
                   <WrappYourChoice>
                       <YourChoice k6Choice={k6Choice} k10Choice={k10Choice} k20Choice={k20Choice} k100Choice={k100Choice} setResult={setResult}/>
+                      {/*{result.length > 0 && <Result>Wyrzuciłeś: {result}</Result>}*/}
                       {result !== null && <Result>Wyrzuciłeś: {result}</Result>}
                   </WrappYourChoice>
 
@@ -100,7 +105,7 @@ const Title = styled.h1`
   padding: 40px 40px 0px 40px;
    border-bottom: 2px solid #899903;
    //border: 2px solid blue;
-  @media (min-width: 520px) {
+  @media (min-width: 550px) {
     width: 72%;
     padding: 40px 10px 0px 10px;
   }
@@ -108,7 +113,7 @@ const Title = styled.h1`
 const WrappQuestionSvg = styled.div`
   //border: 2px solid blue;
     width: 30%;
-  @media (min-width: 520px) {
+  @media (min-width: 550px) {
     width: 26%;;
   }
   `
@@ -138,7 +143,7 @@ const OptionsToChoice = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  @media (min-width: 530px) {
+  @media (min-width: 550px) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -175,16 +180,17 @@ const WrappYourChoice = styled.div`
 `
 
 const Result = styled.h2`
-  width: 60%;
+  //width: 0%;
    text-align: center;
   align-self: center;
   justify-self: center ;
-  padding: 20px 0 10px 0  ;
+  padding: 30px 0 10px 0  ;
   border-bottom: 2px solid #899903;
   //border: 2px solid blue;
-  @media (min-width: 530px) {
+  margin-right: 10px;
+  @media (min-width: 550px) {
     text-align: end;
-    width: 40%;
+    width: 50%;
     align-self: flex-end;  
          }
 `
