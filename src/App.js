@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import GlobalStyle from "./GlobalStyle";
@@ -19,6 +19,7 @@ import YourSavedResults from "./YourSavedResults";
       const [result, setResult] = useState(null)
       const [canISaveTheResult, setCanISaveTheResult] = useState(false)
       const [resultsToShow, setResultsToShow] = useState([])
+      const [numberSavedResults, setNumberSavedResults] = useState(1)
 
       const onClickChoiceK6 = () => {
           setK6Choice(true)
@@ -72,13 +73,21 @@ import YourSavedResults from "./YourSavedResults";
                   </OptionsToChoice>
                   <WrappYourChoice>
                       <YourChoice k6Choice={k6Choice} k10Choice={k10Choice} k20Choice={k20Choice} k100Choice={k100Choice} setResult={setResult}  setCanISaveTheResult={setCanISaveTheResult}/>
-                      {/*{result.length > 0 && <Result>Wyrzuciłeś: {result}</Result>}*/}
                       {result !== null && <Result>Wyrzuciłeś: {result}</Result>}
                   </WrappYourChoice>
               </WrappDicesPart>
               <WrappOperationsOnResults>
-                     {result !== null && <SaveResult result={result} setResult={setResult} canISaveTheResult={canISaveTheResult} setCanISaveTheResult={setCanISaveTheResult} resultsToShow={resultsToShow} setResultsToShow={setResultsToShow}/> }
-                    <YourSavedResults resultsToShow={resultsToShow}/>
+                     {result !== null && <SaveResult
+                         result={result}
+                         setResult={setResult}
+                         canISaveTheResult={canISaveTheResult}
+                         setCanISaveTheResult={setCanISaveTheResult}
+                         resultsToShow={resultsToShow}
+                         setResultsToShow={setResultsToShow}
+                         numberSavedResults={numberSavedResults}
+                         setNumberSavedResults={setNumberSavedResults}
+                     /> }
+                    <YourSavedResults resultsToShow={resultsToShow} setResultsToShow={setResultsToShow}/>
               </WrappOperationsOnResults>
           </AppWrapp>
         </>
@@ -89,11 +98,12 @@ import YourSavedResults from "./YourSavedResults";
 
   const AppWrapp = styled.div`
     margin: 0 auto  ;
+    padding: 10px 0 40px 0;
   //border: 2px solid red;
      min-width: 375px;
     max-width: 700px;
-  min-height: 200vh;
-  width: 100%;
+    min-height: 100vh;
+   width: 100%;
   display: flex;
   flex-direction: column;
     `
@@ -118,6 +128,7 @@ const Title = styled.h1`
     padding: 40px 10px 0px 10px;
   }
   `
+
 const WrappQuestionSvg = styled.div`
   //border: 2px solid blue;
     width: 30%;
@@ -156,6 +167,7 @@ const OptionsToChoice = styled.div`
     justify-content: space-between;
   }
   `
+
 const OneOptionCard = styled.button`
    background-color: transparent;
   border: 2px solid #899903;
@@ -183,18 +195,15 @@ const WrappYourChoice = styled.div`
   display: flex;
   flex-direction: column;
    align-items: center;
-  //height: 300px;
- `
+  `
 
 const Result = styled.h2`
   //border: 2px solid purple;
-  //width: 0%;
    text-align: center;
   align-self: center;
   justify-self: center ;
   padding: 30px 0 10px 0  ;
   border-bottom: 2px solid #899903;
-  //border: 2px solid blue;
   margin-right: 10px;
   @media (min-width: 550px) {
     text-align: end;
@@ -204,9 +213,9 @@ const Result = styled.h2`
 `
 
 const WrappOperationsOnResults = styled.div`
+//border: 2px solid darkorange;
    margin: 10px 40px 0px 40px ;
-  //border: 2px solid darkorange;
-  display: flex;
+    display: flex;
   flex-direction: column;
   @media (min-width: 550px) {
     flex-direction: row;

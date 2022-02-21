@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import {helpersFunctionMakeArrayResults} from "./helpersFunctionMakeArrayResults";
 
 
-const SaveResult = ({ result, setResult, canISaveTheResult, setCanISaveTheResult, resultsToShow, setResultsToShow }) => {
-
-
-  const [numberSavedResults, setNumberSavedResults] = useState(1)
-
-
+const SaveResult = ({ result, setResult, canISaveTheResult, setCanISaveTheResult, resultsToShow, setResultsToShow, numberSavedResults, setNumberSavedResults }) => {
 
   const  onClickSaveYourResults = () => {
            if (numberSavedResults < 5) {
@@ -19,96 +15,38 @@ const SaveResult = ({ result, setResult, canISaveTheResult, setCanISaveTheResult
       localStorage.removeItem(numberSavedResults)
     localStorage.setItem(numberSavedResults, result)
 
-      let resultsArray = [];
+      helpersFunctionMakeArrayResults(setResultsToShow)
 
-      console.log(localStorage)
-      for (let i = 0; i < localStorage.length; i++) {
-          // let key = localStorage.key(i);
-          // let value = localStorage.getItem(key);
-          let value = localStorage.getItem(i+1);
-
-          resultsArray.push(value);
-      };
-
-      console.log('resultsArray', resultsArray)
-      setResultsToShow(resultsArray)
       setCanISaveTheResult(false)
     }
-
-    //
-    // useEffect(()=>{
-    //     let resultsArray = [];
-    //
-    //     console.log(localStorage)
-    //     for (let i = 0; i < localStorage.length; i++) {
-    //         let key = localStorage.key(i);
-    //         let value = localStorage.getItem(key);
-    //
-    //         resultsArray.push(value);
-    //     };
-    //
-    //     console.log('resultsArray', resultsArray)
-    //     setResultsToShow(resultsArray)
-    // },[localStorage])
-
-
-
 
   const onClickDeleteAllResults = () => {
     localStorage.clear()
     setResult(null)
-    setNumberSavedResults(0)
+    setNumberSavedResults(1)
+      setResultsToShow([])
   }
 
-  
-
-  useEffect(()=>{
-    console.log("localStorage", localStorage)
-  },[localStorage])
-
-  useEffect(()=>{
-    console.log("resultsToShow", resultsToShow)
-  },[resultsToShow])
-
-
-   
        return (
-        // <WrappLocalStorageSection>
-         <WrappBtn>
-            <SaveResultBtn onClick={onClickDeleteAllResults}> Wyzeruj</SaveResultBtn>
+        <WrappBtn>
+            <SaveResultBtn onClick={onClickDeleteAllResults}> Wyczyść listę zapisanych wyników</SaveResultBtn>
             {canISaveTheResult && <SaveResultBtn onClick={onClickSaveYourResults}> Zapisz wynik</SaveResultBtn>}
         </WrappBtn>
-       // </WrappLocalStorageSection>
-    )
+         )
 }
 
 export default SaveResult
-
-// const WrappLocalStorageSection = styled.div`
-//   margin: 10px 40px 0px 40px ;
-//   border: 2px solid darkorange;
-//   display: flex;
-//   flex-direction: column;
-//   @media (min-width: 550px) {
-//     flex-direction: row;
-//     justify-content: space-between;
-//   }
-// `
-
-
 
 const WrappBtn = styled.div`
    //border: 2px solid crimson;  
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  //align-items: center;
-  order: 1;
+ order: 1;
   @media (min-width: 550px) {
     order: 2;
     align-items: flex-end;
-    //justify-content: flex-end;
-  }
+   }
   `
 
 const SaveResultBtn = styled.button`
