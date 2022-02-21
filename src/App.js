@@ -4,8 +4,10 @@ import styled from 'styled-components'
 import GlobalStyle from "./GlobalStyle";
 
 import YourChoice from "./YourChoice";
+import SaveResult from "./SaveResult";
 
 import questionSvg from './questionSvg.svg'
+import YourSavedResults from "./YourSavedResults";
 
 
   function App() {
@@ -15,12 +17,15 @@ import questionSvg from './questionSvg.svg'
       const [k20Choice, setK20Choice] = useState(false)
       const [k100Choice, setK100Choice] = useState(false)
       const [result, setResult] = useState(null)
+      const [canISaveTheResult, setCanISaveTheResult] = useState(false)
+      const [resultsToShow, setResultsToShow] = useState([])
 
       const onClickChoiceK6 = () => {
           setK6Choice(true)
           setK10Choice(false)
           setK20Choice(false)
           setK100Choice(false)
+          setResult(null)
                 }
 
       const onClickChoiceK10 = () => {
@@ -28,6 +33,7 @@ import questionSvg from './questionSvg.svg'
           setK10Choice(true)
           setK20Choice(false)
           setK100Choice(false)
+          setResult(null)
       }
 
       const onClickChoiceK20 = () => {
@@ -35,6 +41,7 @@ import questionSvg from './questionSvg.svg'
           setK10Choice(false)
           setK20Choice(true)
           setK100Choice(false)
+          setResult(null)
       }
 
       const onClickChoiceK100 = () => {
@@ -42,11 +49,9 @@ import questionSvg from './questionSvg.svg'
           setK10Choice(false)
           setK20Choice(false)
           setK100Choice(true)
+          setResult(null)
       }
 
-      useEffect(()=> {
-          console.log("result", result)
-      }, [])
 
     return (
         <>
@@ -66,12 +71,15 @@ import questionSvg from './questionSvg.svg'
                       <OneOptionCard onClick={onClickChoiceK100}>k100</OneOptionCard>
                   </OptionsToChoice>
                   <WrappYourChoice>
-                      <YourChoice k6Choice={k6Choice} k10Choice={k10Choice} k20Choice={k20Choice} k100Choice={k100Choice} setResult={setResult}/>
+                      <YourChoice k6Choice={k6Choice} k10Choice={k10Choice} k20Choice={k20Choice} k100Choice={k100Choice} setResult={setResult}  setCanISaveTheResult={setCanISaveTheResult}/>
                       {/*{result.length > 0 && <Result>Wyrzuciłeś: {result}</Result>}*/}
                       {result !== null && <Result>Wyrzuciłeś: {result}</Result>}
                   </WrappYourChoice>
-
               </WrappDicesPart>
+              <WrappOperationsOnResults>
+                     {result !== null && <SaveResult result={result} setResult={setResult} canISaveTheResult={canISaveTheResult} setCanISaveTheResult={setCanISaveTheResult} resultsToShow={resultsToShow} setResultsToShow={setResultsToShow}/> }
+                    <YourSavedResults resultsToShow={resultsToShow}/>
+              </WrappOperationsOnResults>
           </AppWrapp>
         </>
     );
@@ -126,7 +134,7 @@ const QuestionSvgStyled = styled.img`
 const WrappDicesPart = styled.div`
   //border: 2px solid blue;
 margin-top: 40px;
-   padding: 0 40px 40px 40px;
+   padding: 0 40px 20px 40px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -165,21 +173,21 @@ const OneOptionCard = styled.button`
   :active {
     transform: scale(1.2,1.2);
     background-color: #899903; 
-  }
-  
+  }  
 `
 
 const WrappYourChoice = styled.div`
   //border: 2px solid purple;
+  min-height: 280px;
   width: 100%;
   display: flex;
   flex-direction: column;
    align-items: center;
-  height: 300px;
- 
-`
+  //height: 300px;
+ `
 
 const Result = styled.h2`
+  //border: 2px solid purple;
   //width: 0%;
    text-align: center;
   align-self: center;
@@ -190,8 +198,21 @@ const Result = styled.h2`
   margin-right: 10px;
   @media (min-width: 550px) {
     text-align: end;
-    width: 50%;
+    max-width: 50%;
     align-self: flex-end;  
          }
 `
+
+const WrappOperationsOnResults = styled.div`
+   margin: 10px 40px 0px 40px ;
+  //border: 2px solid darkorange;
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 550px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+ 
+`
+
 

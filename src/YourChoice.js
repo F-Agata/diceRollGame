@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import Select from 'react-select'
 
-
 import d6 from './d6.svg'
 import d10 from './d10.svg'
 import d20 from './d20.svg'
@@ -10,7 +9,7 @@ import d100 from './d100.svg'
 
 
 
-const YourChoice = ({ k6Choice, k10Choice, k20Choice, k100Choice, setResult}) => {
+const YourChoice = ({ k6Choice, k10Choice, k20Choice, k100Choice, setResult, setCanISaveTheResult}) => {
 
     const options = [
         {value: 2, label: '2', selected: false},
@@ -20,12 +19,9 @@ const YourChoice = ({ k6Choice, k10Choice, k20Choice, k100Choice, setResult}) =>
     ]
 
     const [howManyMeshes, setHowManyMeshes] = useState(null)
-    const [selectedOption, setSelectedOption] = useState([])
-
     const [showBtn, setShowBtn] = useState(false)
-    const [showMoreDices, setShowMoreDices] = useState(false)
     const [selected, setSelected] = useState(false)
-    const [howManyDices, setHowManyDices] = useState(null)
+    const [howManyDices, setHowManyDices] = useState(1)
 
 
     useEffect(() => {
@@ -43,32 +39,25 @@ const YourChoice = ({ k6Choice, k10Choice, k20Choice, k100Choice, setResult}) =>
         }
     }, [k6Choice, k10Choice, k20Choice, k100Choice])
 
-const onClickGiveResult = () => {
-    const rollDice = Math.floor(Math.random()*howManyMeshes+1);
-    setResult(rollDice)
-}
 
-const onChangeManyDices = (e, options) => {
+const onChangeManyDices = (e) => {
          setResult(null)
     setHowManyDices(e.value)
 }
 
-     const onClickMoreDices = () => {
+ const onClickGiveResult = () => {
         setResult(null)
         // console.log("howManyDices", howManyDices)
         let resultsArray = []
 
-        if(howManyDices !== null) {
-            for (let i=0; i < howManyDices; i++) {
-            let randomNumber = (Math.floor(Math.random()*howManyMeshes+1))
-            resultsArray.push(randomNumber)
-            // console.log(randomNumber)
+         for (let i=0; i < howManyDices; i++) {
+                 let randomNumber = (Math.floor(Math.random()*howManyMeshes+1))
+                 resultsArray.push(randomNumber)}
 
-        }}
-        const resultsStrings = resultsArray.join(", ")
-         // console.log(resultsArray)
+         const resultsStrings = resultsArray.join(", ")
          setResult(resultsStrings)
 
+     setCanISaveTheResult(true)
        }
 
 
@@ -81,16 +70,11 @@ const onChangeManyDices = (e, options) => {
                 {k100Choice && <Dice src={d100} alt="d100picture"/>}
             </WrappDice>
             <WrappBtn>
-                {showBtn && <BtnGiveResult onClick={onClickGiveResult}>Rzuć 1 kością</BtnGiveResult>}
-
-
-                {showBtn &&
+               {showBtn &&
                 <WrappBtnHowManyDices>
-                    <BtnHowManyDices options={options} isSelect={selected} placeholder={"Więcej kości?"} onChange={(e)=>onChangeManyDices(e, options)} >  </BtnHowManyDices>
+                    <BtnHowManyDices options={options} isSelect={selected} placeholder={"Więcej kości?"} onChange={(e)=>onChangeManyDices(e)} >  </BtnHowManyDices>
                 </WrappBtnHowManyDices>}
-
-                {showBtn && <BtnMoreDices onClick={onClickMoreDices}>Rzuć</BtnMoreDices>}
-
+                {showBtn && <BtnMoreDices onClick={onClickGiveResult}>Rzuć</BtnMoreDices>}
             </WrappBtn>
        </WrappDiceAndBtn>
     )
@@ -99,7 +83,7 @@ const onChangeManyDices = (e, options) => {
 export default YourChoice
 
 const WrappDiceAndBtn = styled.div`
-  //border: 2px solid crimson;  
+  // border: 2px solid crimson;  
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -157,13 +141,12 @@ const BtnGiveResult = styled.button`
   :hover {
     transform: scale(1.2,1.2);
   }
-  :active {
-    transform: scale(1.2,1.2);
-    background-color: #899903;
-  }
+  //:active {
+  //  transform: scale(1.2,1.2);
+  //  background-color: #899903;
+  //}
   @media (min-width: 550px) {
-    
-    margin: 10px  ;
+        margin: 10px  ;
   }
   `
 
@@ -181,10 +164,10 @@ const BtnGiveResult = styled.button`
   :hover {
     transform: scale(1.2,1.2);
   }
-  :active {
-    transform: scale(1.2,1.2);
-    background-color: #899903;
-  }
+  // :active {
+  //   transform: scale(1.2,1.2);
+  //   background-color: #899903;
+  // }
   @media (min-width: 550px) {
     //align-self: flex-start;
     margin: 10px  ;
