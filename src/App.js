@@ -9,7 +9,7 @@ import SaveResult from './SaveResult'
 import questionSvg from './questionSvg.svg'
 import YourSavedResults from './YourSavedResults'
 
-function App () {
+function App() {
   const [k6Choice, setK6Choice] = useState(false)
   const [k10Choice, setK10Choice] = useState(false)
   const [k20Choice, setK20Choice] = useState(false)
@@ -58,7 +58,7 @@ function App () {
         <Header>
           <Title>Jaką kostkę wybierasz?</Title>
           <WrappQuestionSvg>
-            <QuestionSvgStyled src={questionSvg} alt='questionSvg' />
+            <QuestionSvgStyled src={questionSvg} alt="questionSvg" />
           </WrappQuestionSvg>
         </Header>
         <WrappDicesPart>
@@ -69,21 +69,33 @@ function App () {
             <OneOptionCard onClick={onClickChoiceK100}>k100</OneOptionCard>
           </OptionsToChoice>
           <WrappYourChoice>
-            <YourChoice k6Choice={k6Choice} k10Choice={k10Choice} k20Choice={k20Choice} k100Choice={k100Choice} setResult={setResult} setCanISaveTheResult={setCanISaveTheResult} />
+            <YourChoice
+              k6Choice={k6Choice}
+              k10Choice={k10Choice}
+              k20Choice={k20Choice}
+              k100Choice={k100Choice}
+              setResult={setResult}
+              setCanISaveTheResult={setCanISaveTheResult}
+            />
             {result !== null && <Result>Wyrzuciłeś: {result}</Result>}
           </WrappYourChoice>
         </WrappDicesPart>
         <WrappOperationsOnResults>
-          {result !== null && <SaveResult
-            result={result}
-            setResult={setResult}
-            canISaveTheResult={canISaveTheResult}
-            setCanISaveTheResult={setCanISaveTheResult}
+          {result !== null && (
+            <SaveResult
+              result={result}
+              setResult={setResult}
+              canISaveTheResult={canISaveTheResult}
+              setCanISaveTheResult={setCanISaveTheResult}
+              setResultsToShow={setResultsToShow}
+              numberSavedResults={numberSavedResults}
+              setNumberSavedResults={setNumberSavedResults}
+            />
+          )}
+          <YourSavedResults
+            resultsToShow={resultsToShow}
             setResultsToShow={setResultsToShow}
-            numberSavedResults={numberSavedResults}
-            setNumberSavedResults={setNumberSavedResults}
-                              />}
-          <YourSavedResults resultsToShow={resultsToShow} setResultsToShow={setResultsToShow} />
+          />
         </WrappOperationsOnResults>
       </AppWrapp>
     </>
@@ -93,19 +105,19 @@ function App () {
 export default App
 
 const AppWrapp = styled.div`
-    margin: 0 auto  ;
-    padding: 10px 0 40px 0;
-     min-width: 375px;
-    max-width: 700px;
-    min-height: 100vh;
-   width: 100%;
+  margin: 0 auto;
+  padding: 10px 0 40px 0;
+  min-width: 375px;
+  max-width: 700px;
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-    `
+`
 
 const Header = styled.div`
   padding: 0px 40px 0px 40px;
-    width: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -113,31 +125,31 @@ const Header = styled.div`
 
 const Title = styled.h1`
   width: 70%;
- text-align: center; 
+  text-align: center;
   align-self: flex-end;
   padding: 40px 40px 0px 40px;
-   border-bottom: 2px solid #899903;
+  border-bottom: 2px solid #899903;
   @media (min-width: 550px) {
     width: 72%;
     padding: 40px 10px 0px 10px;
   }
-  `
+`
 
 const WrappQuestionSvg = styled.div`
-    width: 30%;
+  width: 30%;
   @media (min-width: 550px) {
-    width: 26%;;
+    width: 26%;
   }
-  `
+`
 
 const QuestionSvgStyled = styled.img`
-    width: 100%;
+  width: 100%;
   height: 100%;
 `
 
 const WrappDicesPart = styled.div`
- margin-top: 40px;
-   padding: 0 40px 20px 40px;
+  margin-top: 40px;
+  padding: 0 40px 20px 40px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -157,26 +169,26 @@ const OptionsToChoice = styled.div`
     flex-direction: row;
     justify-content: space-between;
   }
-  `
+`
 
 const OneOptionCard = styled.button`
-   background-color: transparent;
+  background-color: transparent;
   border: 2px solid #899903;
   width: 200px;
   height: 50px;
   padding: 10px;
-  margin: 10px ;
+  margin: 10px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;  
+  transition: 0.3s;
   :hover {
-    transform: scale(1.2,1.2); 
+    transform: scale(1.2, 1.2);
   }
   :active {
-    transform: scale(1.2,1.2);
-    background-color: #899903; 
-  }  
+    transform: scale(1.2, 1.2);
+    background-color: #899903;
+  }
 `
 
 const WrappYourChoice = styled.div`
@@ -184,8 +196,8 @@ const WrappYourChoice = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-   align-items: center;
-  `
+  align-items: center;
+`
 
 const Result = styled.h2`
   text-align: center;
@@ -202,7 +214,7 @@ const Result = styled.h2`
 `
 
 const WrappOperationsOnResults = styled.div`
-  margin: 10px 40px 0px 40px ;
+  margin: 10px 40px 0px 40px;
   display: flex;
   flex-direction: column;
   @media (min-width: 550px) {

@@ -9,15 +9,20 @@ const YourSavedResults = ({ resultsToShow, setResultsToShow }) => {
   }, [])
 
   const showResults = resultsToShow.map((item, index) => (
-    <WrappShowResults key={index}>
-      {item}
-    </WrappShowResults>
+    <WrappShowResults key={index}>{item}</WrappShowResults>
   ))
 
   return (
     <WrappShow5Results>
       <Title> Max 5 ostatnich zapisanych wyników:</Title>
-      {localStorage.length !== 0 ? showResults : <AnyMessagesSavedResults> Nie masz zapisanych żadnych wyników </AnyMessagesSavedResults>}
+      {localStorage.length !== 0 ? (
+        showResults
+      ) : (
+        <AnyMessagesSavedResults>
+          {' '}
+          Nie masz zapisanych żadnych wyników{' '}
+        </AnyMessagesSavedResults>
+      )}
     </WrappShow5Results>
   )
 }
@@ -32,12 +37,12 @@ const WrappShow5Results = styled.div`
   }
 `
 const WrappShowResults = styled.p`
-display: block;
+  display: block;
   line-height: 20px;
   padding: 10px 20px;
   font-size: 20px;
   text-align: center;
- `
+`
 
 const Title = styled.h3`
   margin-top: 10px;
@@ -48,7 +53,7 @@ const Title = styled.h3`
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  `
+`
 
 const AnyMessagesSavedResults = styled.p`
   margin-top: 10px;
