@@ -1,44 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
-import {helpersFunctionMakeArrayResults} from "./helpersFunctionMakeArrayResults";
+import { helpersFunctionMakeArrayResults } from './helpersFunctionMakeArrayResults'
 
+const SaveResult = ({ result, setResult, canISaveTheResult, setCanISaveTheResult, setResultsToShow, numberSavedResults, setNumberSavedResults }) => {
+  const onClickSaveYourResults = () => {
+    if (numberSavedResults < 5) {
+      setNumberSavedResults(prevNumberSavedResults => prevNumberSavedResults + 1)
+    } else {
+      setNumberSavedResults(1)
+    }
 
-const SaveResult = ({ result, setResult, canISaveTheResult, setCanISaveTheResult, resultsToShow, setResultsToShow, numberSavedResults, setNumberSavedResults }) => {
-
-  const  onClickSaveYourResults = () => {
-           if (numberSavedResults < 5) {
-            setNumberSavedResults(prevNumberSavedResults => prevNumberSavedResults + 1);
-           } else {
-          setNumberSavedResults(1)
-                  }
-
-      localStorage.removeItem(numberSavedResults)
+    localStorage.removeItem(numberSavedResults)
     localStorage.setItem(numberSavedResults, result)
 
-      helpersFunctionMakeArrayResults(setResultsToShow)
+    helpersFunctionMakeArrayResults(setResultsToShow)
 
-      setCanISaveTheResult(false)
-    }
+    setCanISaveTheResult(false)
+  }
 
   const onClickDeleteAllResults = () => {
     localStorage.clear()
     setResult(null)
     setNumberSavedResults(1)
-      setResultsToShow([])
+    setResultsToShow([])
   }
 
-       return (
-        <WrappBtn>
-            <SaveResultBtn onClick={onClickDeleteAllResults}> Wyczyść listę zapisanych wyników</SaveResultBtn>
-            {canISaveTheResult && <SaveResultBtn onClick={onClickSaveYourResults}> Zapisz wynik</SaveResultBtn>}
-        </WrappBtn>
-         )
+  return (
+    <WrappBtn>
+      <SaveResultBtn onClick={onClickDeleteAllResults}> Wyczyść listę zapisanych wyników</SaveResultBtn>
+      {canISaveTheResult && <SaveResultBtn onClick={onClickSaveYourResults}> Zapisz wynik</SaveResultBtn>}
+    </WrappBtn>
+  )
 }
 
 export default SaveResult
 
 const WrappBtn = styled.div`
-   //border: 2px solid crimson;  
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -68,7 +65,3 @@ const SaveResultBtn = styled.button`
     align-self: flex-end;
   
   `
-
-
-
-

@@ -1,34 +1,30 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 import { helpersFunctionMakeArrayResults } from './helpersFunctionMakeArrayResults'
 
+const YourSavedResults = ({ resultsToShow, setResultsToShow }) => {
+  useEffect(() => {
+    helpersFunctionMakeArrayResults(setResultsToShow)
+  }, [])
 
-const YourSavedResults = ({ resultsToShow, setResultsToShow}) => {
+  const showResults = resultsToShow.map((item, index) => (
+    <WrappShowResults key={index}>
+      {item}
+    </WrappShowResults>
+  ))
 
-    useEffect(()=>{
-        helpersFunctionMakeArrayResults(setResultsToShow)
-    },[])
-
-    const showResults = resultsToShow.map((item, index) => (
-        <WrappShowResults key={index}>
-            {item}
-        </WrappShowResults>
-    ))
-
-    return (
-        <WrappShow5Results>
-            <Title > Max 5 ostatnich zapisanych wyników:</Title>
-            {localStorage.length !== 0 ? showResults : <AnyMessagesSavedResults> Nie masz zapisanych żadnych wyników </AnyMessagesSavedResults>}
-        </WrappShow5Results>
-    )
-};
+  return (
+    <WrappShow5Results>
+      <Title> Max 5 ostatnich zapisanych wyników:</Title>
+      {localStorage.length !== 0 ? showResults : <AnyMessagesSavedResults> Nie masz zapisanych żadnych wyników </AnyMessagesSavedResults>}
+    </WrappShow5Results>
+  )
+}
 
 export default YourSavedResults
 
-
 const WrappShow5Results = styled.div`
-  //border: 2px solid purple;
   flex-grow: 1;
   order: 2;
   @media (min-width: 550px) {
